@@ -9,10 +9,10 @@ export default new Router({
     // mode: 'hash',
     base: process.env.BASE_URL,
     routes: [
-        {
-            path: '/',
-            redirect: '/home'
-        },
+        // {
+        //     path: '/',
+        //     redirect: '/home'
+        // },
         {
             path: '/home',
             name: 'home',

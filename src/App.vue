@@ -5,10 +5,21 @@
         <!--            |-->
         <!--            <router-link to="/about">About</router-link>-->
         <!--        </div>-->
-        <router-view/>
+        <!--        <router-view/>-->
+        <home></home>
     </div>
 </template>
 
+<script>
+    import Home from "./views/Home";
+
+    export default {
+        name: 'app',
+        components: {
+            Home
+        }
+    }
+</script>
 <style>
 
 </style>
