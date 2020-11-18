@@ -8,7 +8,7 @@
         <div class="input-append">
             <input id="photoCover" type="text" class="form-control" style="width: 75%">
             <button class="btn  btn-primary" @click="myclick">浏览</button>
-            <button id="uploadbtn" class="btn btn-primary" @click="btnClick">上传</button>
+            <button id="uploadbtn" class="btn btn-primary disabled" @click="btnClick">上传</button>
         </div>
 
 
@@ -61,6 +61,9 @@
                 // console.log(this.file.name);
                 // 为明处上传文本框赋值 文件路径
                 $('#photoCover').val(this.file.name)
+                // 启用上传按钮
+                $('#uploadbtn').removeClass('disabled')
+
 
             },
 
@@ -84,7 +87,9 @@
                         if (res.data.code === 1) {
                             this.info = '考勤数据处理完毕，请下载考勤结果文件...'
                             this.download_url = res.data.info
-                            // 让下载按启用
+                            // 启用上传按钮
+                            $('#uploadbtn').addClass('disabled')
+                            // 启用并显示下载按钮
                             this.disabled = false
                             this.show = true
                             // 清除上传文件
