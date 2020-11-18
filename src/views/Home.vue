@@ -120,6 +120,7 @@
     .input-append {
         display: flex;
         justify-content: space-between;
+        height: 39px;
 
     }
 
