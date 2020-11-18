@@ -1,17 +1,29 @@
 <template>
-    <div class="home">
+    <div class="home container">
         <!--  多文件上传 multiple="multiplt" -->
         <!--    <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" multiple="multiplt">-->
-        <input type="file" id="fileExport" @change="handleFileChange" ref="inputer">
-        <button @click="btnClick">上传</button>
-        <h4>{{info}}</h4>
-        <button id="download" :disabled="disabled" v-show="show" @click="download">下载考勤结果</button>
+        <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" style="display: none">
+
+
+        <div class="input-append">
+            <input id="photoCover" type="text" class="form-control" style="width: 75%">
+            <button class="btn  btn-primary" @click="myclick">浏览</button>
+            <button id="uploadbtn" class="btn btn-primary" @click="btnClick">上传</button>
+        </div>
+
+
+        <div class="alert alert-info">
+            <strong>{{info}}</strong>
+        </div>
+        <button id="download" class="btn btn-primary" :disabled="disabled" v-show="show" @click="download">下载考勤结果
+        </button>
     </div>
 </template>
 
 <script>
 
     import axios from 'axios'
+    import $ from 'jquery'
 
     export default {
         name: 'home',
@@ -25,6 +37,9 @@
             }
         },
         methods: {
+            myclick() {
+                $('#fileExport').click();
+            },
             download() {
                 // 动态创建下载标签
                 let a = document.createElement('a')
@@ -43,7 +58,10 @@
                 this.formData = new FormData();//new一个formData事件
                 this.formData.append("file", this.file); //将file属性添加到formData里
                 //此时formData就是我们要向后台传的参数了
-                console.log(this.file);
+                // console.log(this.file.name);
+                // 为明处上传文本框赋值 文件路径
+                $('#photoCover').val(this.file.name)
+
             },
 
             btnClick() {
@@ -70,7 +88,7 @@
                             this.disabled = false
                             this.show = true
                             // 清除上传文件
-                            let input = document.getElementById('fileExport')
+                            let input = document.getElementById('photoCover')
                             input.value = null
                         }
                     }).catch(error => {
@@ -92,5 +110,15 @@
         /*background-color: lightblue;*/
         width: 30%;
         margin: 50px auto;
+    }
+
+    .input-append {
+        display: flex;
+        justify-content: space-between;
+
+    }
+
+    .alert {
+        margin: 10px 0;
     }
 </style>
