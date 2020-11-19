@@ -5,17 +5,15 @@
         <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" style="display: none">
 
 
-        <div class="input-append">
-            <input id="photoCover" type="text" class="form-control" style="width: 75%">
-            <button class="btn  btn-primary" @click="myclick">浏览</button>
+        <div class="row input-append">
+            <input id="photoCover" type="text" class="form-control" style="width: 60%">
+            <button id="scanbtn" class="btn  btn-primary" @click="myclick">浏览</button>
             <button id="uploadbtn" class="btn btn-primary disabled" @click="btnClick">上传</button>
         </div>
-
-
-        <div class="alert alert-info">
+        <div class="row alert alert-info">
             <strong>{{info}}</strong>
         </div>
-        <button id="download" class="btn btn-primary" :disabled="disabled" v-show="show" @click="download">下载考勤结果
+        <button id="download" class="row btn btn-primary" :disabled="disabled" v-show="show" @click="download">下载考勤结果
         </button>
     </div>
 </template>
@@ -117,11 +115,8 @@
         margin: 50px auto;
     }
 
-    .input-append {
-        display: flex;
-        justify-content: space-between;
-        height: 39px;
-
+    #scanbtn {
+        margin: 0 10px 0 10px;
     }
 
     .alert {
