@@ -1,20 +1,32 @@
 <template>
-    <div class="home container">
-        <!--  多文件上传 multiple="multiplt" -->
-        <!--    <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" multiple="multiplt">-->
-        <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" style="display: none">
+    <div class="container">
+        <div class="home">
+            <!--  多文件上传 multiple="multiplt" -->
+            <!--    <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" multiple="multiplt">-->
+            <input type="file" id="fileExport" @change="handleFileChange" ref="inputer" style="display: none">
 
 
-        <div class="row input-append">
-            <input id="photoCover" type="text" class="form-control" style="width: 60%">
-            <button id="scanbtn" class="btn  btn-primary" @click="myclick">浏览</button>
-            <button id="uploadbtn" class="btn btn-primary disabled" @click="btnClick">上传</button>
+            <div class="row">
+                <input id="photoCover" type="text" class="form-control col-md-10">
+                <button id="scanbtn" class="btn  btn-primary col-md-1 pull-right" @click="myclick">
+                    浏览
+                </button>
+                <button id="uploadbtn" class="btn btn-primary disabled col-md-1 pull-right" @click="btnClick">
+                    上传
+                </button>
+            </div>
+            <div class="row">
+                <div class="alert alert-info col-md-12">
+                    <strong>{{info}}</strong>
+                </div>
+            </div>
+            <div class="row">
+                <button id="download" class="btn btn-primary col-md-12" :disabled="disabled" v-show="show"
+                        @click="download">
+                    下载考勤结果
+                </button>
+            </div>
         </div>
-        <div class="row alert alert-info">
-            <strong>{{info}}</strong>
-        </div>
-        <button id="download" class="row btn btn-primary" :disabled="disabled" v-show="show" @click="download">下载考勤结果
-        </button>
     </div>
 </template>
 
@@ -109,17 +121,20 @@
 
 
 <style>
-    .home {
-        /*background-color: lightblue;*/
-        width: 30%;
+    .container {
         margin: 50px auto;
     }
 
+    .row {
+        margin: 10px 0;
+    }
+
     #scanbtn {
-        margin: 0 10px 0 10px;
+        /*margin: 0 10px 0 10px;*/
     }
 
     .alert {
-        margin: 10px 0;
+        /*margin: 10px auto;*/
+        /*width: 100%;*/
     }
 </style>
