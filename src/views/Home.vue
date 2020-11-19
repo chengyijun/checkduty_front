@@ -77,6 +77,10 @@
             },
 
             btnClick() {
+                // 如果没有选择上传文件 就不执行上传请求了
+                if ($('#photoCover').val() === '')
+                    return
+
                 // 发送上传文件请求
                 upload(this.formData).then(response => {
                     // this.info = response.info
