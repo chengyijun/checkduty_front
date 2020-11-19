@@ -31,8 +31,7 @@
 </template>
 
 <script>
-
-    import axios from 'axios'
+    import {upload, result} from "../network/home";
     import $ from 'jquery'
 
     export default {
@@ -42,8 +41,7 @@
                 info: '请上传考勤原始Excel文件',
                 download_url: null,
                 disabled: true,
-                show: false,
-                api: 'http://192.168.10.129:5000/api'
+                show: false
             }
         },
         methods: {
@@ -61,9 +59,10 @@
             },
 
             handleFileChange(e) {
-                // console.log(e.target.files)
-                let inputDOM = this.$refs.inputer;
-                this.file = inputDOM.files[0];// 通过DOM取文件数据
+                const files = e.target.files
+                // let inputDOM = this.$refs.inputer;
+                // this.file = inputDOM.files[0];// 通过DOM取文件数据
+                this.file = files[0]
                 let size = Math.floor(this.file.size / 1024);//计算文件的大小　
                 this.formData = new FormData();//new一个formData事件
                 this.formData.append("file", this.file); //将file属性添加到formData里
@@ -78,25 +77,15 @@
             },
 
             btnClick() {
-                axios({
-                    method: 'post',
-                    url: this.api + '/upload',
-                    data: this.formData,
-                    headers: {
-                        'Content-Type': 'multipart/form-data'
-                    }
-                }).then(response => {
-
-                    // this.info = response.data.info
+                // 发送上传文件请求
+                upload(this.formData).then(response => {
+                    // this.info = response.info
                     this.info = '极速处理中，请稍后...'
-                    // 发送处理请求
-                    axios({
-                        method: 'get',
-                        url: this.api + '/result',
-                    }).then(res => {
-                        if (res.data.code === 1) {
+                    // 文件上传成功之后 发送处理文件请求
+                    result().then(res => {
+                        if (res.code === 1) {
                             this.info = '考勤数据处理完毕，请下载考勤结果文件...'
-                            this.download_url = res.data.info
+                            this.download_url = res.info
                             // 启用上传按钮
                             $('#uploadbtn').addClass('disabled')
                             // 启用并显示下载按钮
@@ -129,12 +118,4 @@
         margin: 10px 0;
     }
 
-    #scanbtn {
-        /*margin: 0 10px 0 10px;*/
-    }
-
-    .alert {
-        /*margin: 10px auto;*/
-        /*width: 100%;*/
-    }
 </style>
