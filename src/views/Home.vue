@@ -34,6 +34,12 @@
     import {upload, result} from "../network/home";
     import $ from 'jquery'
 
+    const a = document.createElement('a')
+    a.onclick = function (e) {
+        // 阻止超链接的点击事件 冒泡到父节点
+        e.stopPropagation()
+    }
+
     export default {
         name: 'home',
         data() {
@@ -45,17 +51,20 @@
             }
         },
         methods: {
+
             myclick() {
                 $('#fileExport').click();
             },
             download() {
-                // 动态创建下载标签
-                let a = document.createElement('a')
-                const download = document.getElementById('download')
-                download.appendChild(a)
+                const downloadbtn = document.getElementById('download')
+                // 移除子dom
+                for (const child of downloadbtn.childNodes) {
+                    if (child.tagName === 'A')
+                        downloadbtn.removeChild(child)
+                }
+                downloadbtn.appendChild(a)
                 a.href = this.download_url
-                a.click();
-
+                a.click()
             },
 
             handleFileChange(e) {
