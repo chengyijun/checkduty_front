@@ -11,7 +11,7 @@
                 <button id="scanbtn" class="btn  btn-primary col-md-1 pull-right" @click="myclick">
                     浏览
                 </button>
-                <button id="uploadbtn" class="btn btn-primary disabled col-md-1 pull-right" @click="btnClick">
+                <button id="uploadbtn" class="btn btn-success disabled col-md-1 pull-right" @click="btnClick">
                     上传
                 </button>
             </div>
